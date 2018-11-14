@@ -1,11 +1,11 @@
 @extends('layout.backend')
 
-@section('title', '| Users')
+@section('title', '| Permission')
 
 @section('content')
 
     <div class="ui padded container segment">
-        <h2 class="ui header">Users List</h2>
+        <h2 class="ui header">Permission List</h2>
 
         <div class="ui grid">
             <div class="four column row">
@@ -21,9 +21,9 @@
                     </div>
                 </div>
                 <div class="right floated column">
-                    <a href="{{ base_url('backend/users/create') }}" class="ui icon primary right floated button">
+                    <a href="{{ base_url('backend/user/permissions/create') }}" class="ui icon primary right floated button">
                         <i class="icon user"></i>
-                        Add User
+                        Add Permission
                     </a>
                 </div>
             </div>
@@ -37,36 +37,31 @@
                             <input type="checkbox"> <label>Select All</label>
                         </div>   
                     </th>
-                    <th>Username</th>
-                    <th>Email</th>
-                    <th>Joined Date</th>
+                    <th>Name</th>
+                    <th>Definition</th>
+                    <th>Groups</th>
                     <th></th>
                 </tr>
             </thead>
             <tbody>
-                @if( count($users) )
-                    @foreach($users as $user)
+                @if( count($permissions) )
+                    @foreach($permissions as $permission)
                     <tr>
                         <td class="collapsing">
                             <div class="ui fitted toggle checkbox">
-                                <input type="checkbox" name="id" value="{{ $user->id }}"> 
+                                <input type="checkbox" name="id" value="{{ $permission->id }}"> 
                                 <label></label>
                             </div>
                         </td>
-                        <td>{{ $user->username }}</td>
-                        <td>{{ $user->email }}</td>
-                        <td>{{ $user->date_created }}</td>
+                        <td>{{ $permission->name }}</td>
+                        <td>{{ $permission->definition }}</td>
+                        <td></td>
                         <td> 
-                            <a class="ui mini button primary icon" 
-                                href="{{ base_url('backend/users/show/' . $user->id) }}"
-                                data-tooltip="View User Information">
-                                <i class="fa fa-eye"></i>
-                            </a>
                             <a class="ui mini button orange icon" 
-                                href="{{ base_url('backend/users/edit/' . $user->id) }}"
-                                data-tooltip="Edit User Information">
+                                href="{{ base_url('backend/permission/edit/' . $permission->id) }}"
+                                data-tooltip="Edit Permission">
                                 <i class="fa fa-pencil"></i>
-                            </a>                           
+                            </a>                             
                         </td>
                     </tr>
                     @endforeach

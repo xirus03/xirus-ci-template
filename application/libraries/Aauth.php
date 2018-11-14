@@ -1938,7 +1938,7 @@ class Aauth {
 	public function allow_group($group_par, $perm_par) {
 
 		$perm_id = $this->get_perm_id($perm_par);
-
+		
 		if( ! $perm_id) {
 			return FALSE;
 		}

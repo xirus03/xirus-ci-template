@@ -1,11 +1,11 @@
 @extends('layout.backend')
 
-@section('title', '| Users')
+@section('title', '| Group')
 
 @section('content')
 
     <div class="ui padded container segment">
-        <h2 class="ui header">Users List</h2>
+        <h2 class="ui header">Group List</h2>
 
         <div class="ui grid">
             <div class="four column row">
@@ -21,9 +21,9 @@
                     </div>
                 </div>
                 <div class="right floated column">
-                    <a href="{{ base_url('backend/users/create') }}" class="ui icon primary right floated button">
-                        <i class="icon user"></i>
-                        Add User
+                    <a href="{{ base_url('backend/user/groups/create') }}" class="ui icon primary right floated button">
+                        <i class="icon plus"></i>
+                        Add Group
                     </a>
                 </div>
             </div>
@@ -37,36 +37,29 @@
                             <input type="checkbox"> <label>Select All</label>
                         </div>   
                     </th>
-                    <th>Username</th>
-                    <th>Email</th>
-                    <th>Joined Date</th>
+                    <th>Name</th>
+                    <th>Definition</th>
                     <th></th>
                 </tr>
             </thead>
             <tbody>
-                @if( count($users) )
-                    @foreach($users as $user)
+                @if( count($groups) )
+                    @foreach($groups as $group)
                     <tr>
                         <td class="collapsing">
                             <div class="ui fitted toggle checkbox">
-                                <input type="checkbox" name="id" value="{{ $user->id }}"> 
+                                <input type="checkbox" name="id" value="{{ $group->id }}"> 
                                 <label></label>
                             </div>
                         </td>
-                        <td>{{ $user->username }}</td>
-                        <td>{{ $user->email }}</td>
-                        <td>{{ $user->date_created }}</td>
+                        <td>{{ $group->name }}</td>
+                        <td>{{ $group->definition }}</td>
                         <td> 
-                            <a class="ui mini button primary icon" 
-                                href="{{ base_url('backend/users/show/' . $user->id) }}"
-                                data-tooltip="View User Information">
-                                <i class="fa fa-eye"></i>
-                            </a>
                             <a class="ui mini button orange icon" 
-                                href="{{ base_url('backend/users/edit/' . $user->id) }}"
-                                data-tooltip="Edit User Information">
+                                href="{{ base_url('backend/groups/edit/' . $group->id) }}"
+                                data-tooltip="Edit Group">
                                 <i class="fa fa-pencil"></i>
-                            </a>                           
+                            </a>                             
                         </td>
                     </tr>
                     @endforeach

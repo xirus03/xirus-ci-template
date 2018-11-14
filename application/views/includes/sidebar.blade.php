@@ -14,8 +14,8 @@
         </a>
         <div class="content menu">
             <a class="item" href="{{ base_url('backend/users') }}">Users</a>
-            <a class="item" href="{{ base_url('backend/user/role') }}">Roles</a>
-            <a class="item" href="{{ base_url('backend/user/permission') }}">Permission</a>
+            <a class="item" href="{{ base_url('backend/user/groups') }}">Group</a>
+            <a class="item" href="{{ base_url('backend/user/permissions') }}">Permission</a>
         </div>
     </div>
     <div class="item">
