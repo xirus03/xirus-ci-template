@@ -10,7 +10,6 @@ class Permissions extends MY_Controller {
 	public function index()
 	{
 		$data['permissions'] = Permission::take(10)->get();
-		
 		$this->view('backend.user.permission.index', $data);
 	}
 

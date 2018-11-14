@@ -55,7 +55,11 @@
                         </td>
                         <td>{{ $permission->name }}</td>
                         <td>{{ $permission->definition }}</td>
-                        <td></td>
+                        <td>
+                            @foreach($permission->groups as $group)
+                                <label class="ui blue label">{{ $group->name }}</label>
+                            @endforeach
+                        </td>
                         <td> 
                             <a class="ui mini button orange icon" 
                                 href="{{ base_url('backend/permission/edit/' . $permission->id) }}"
