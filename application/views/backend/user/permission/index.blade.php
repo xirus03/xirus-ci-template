@@ -57,7 +57,9 @@
                         <td>{{ $permission->definition }}</td>
                         <td>
                             @foreach($permission->groups as $group)
-                                <label class="ui blue label">{{ $group->name }}</label>
+                                <label class="ui blue label" data-tooltip="{{ $group->definition }}">
+                                    {{ $group->name }}
+                                </label>
                             @endforeach
                         </td>
                         <td> 
