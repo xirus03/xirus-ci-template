@@ -18,15 +18,6 @@
                 <textarea name="definition" cols="30" rows="3" placeholder="Definition"></textarea>
             </div>
 
-            <div class="field">
-                <label>Groups</label>
-                <select name="groups[]" multiple class="ui selection dropdown">
-                    @foreach($groups as $group)
-                        <option value="{{ $group->id }}">{{ $group->name }}</option>
-                    @endforeach
-                </select>
-            </div>
-
             <button type="submit" class="ui submit button primary">Submit</button>
         </div>
     </form>

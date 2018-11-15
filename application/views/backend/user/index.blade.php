@@ -40,6 +40,7 @@
                     <th>Username</th>
                     <th>Email</th>
                     <th>Joined Date</th>
+                    <th>Groups</th>
                     <th></th>
                 </tr>
             </thead>
@@ -56,6 +57,13 @@
                         <td>{{ $user->username }}</td>
                         <td>{{ $user->email }}</td>
                         <td>{{ $user->date_created }}</td>
+                        <td>
+                            @foreach($user->groups as $group)
+                                <label class="ui blue label" data-tooltip="{{ $group->definition }}">
+                                    {{ $group->name }}
+                                </label>
+                            @endforeach
+                        </td>
                         <td> 
                             <a class="ui mini button primary icon" 
                                 href="{{ base_url('backend/users/show/' . $user->id) }}"

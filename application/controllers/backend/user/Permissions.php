@@ -20,25 +20,19 @@ class Permissions extends MY_Controller {
 
 	public function insert() {
 		$name = $this->input->post('name');
-		$definition = $this->input->post('definition');
-		$groups = $this->input->post('groups');
+		$definition = $this->input->post('definition');		
+		redirect( base_url('/backend/user/permissions') );
+	}
 
-		/** 
-		 * create new permission 
-		 * @return permission_id int
-		 */
-		$this->aauth->create_perm($name, $definition);
-		$permission_id = Permission::where('name', $name)->first()->id;
+	public function edit($id) {
+		$data['permission'] = Permission::find($id);
+		$data['groups'] = Group::orderBy('id', 'asc')->get();
+		$this->view('backend.user.permission.edit', $data);
+	}
 
-		/**
-		 * set permission groups
-		 * @param group_id int
-		 * @param permission_id int
-		 */
-		foreach($groups as $group_id) {
-			$this->aauth->allow_group($group_id, $permission_id);
-		}
-		
+	public function update($id) {
+		$permission = Permission::find($id);
+		$permission->update( $this->input->post() );
 		redirect( base_url('/backend/user/permissions') );
 	}
 }

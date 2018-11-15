@@ -4,6 +4,7 @@ use \Illuminate\Database\Eloquent\Model as Eloquent;
 
 class Permission extends Eloquent {
     protected $table = 'aauth_perms';
+    protected $fillable = ['name', 'definition'];
     public $timestamps = false;
 
     public function groups() {

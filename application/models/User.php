@@ -8,4 +8,8 @@ class User extends Eloquent {
     protected $fillable = ['email', 'username', 'pass'];
     protected $hidden = ['pass'];
     public $timestamps = false;
+
+    public function groups() {
+        return $this->belongsToMany(Group::class, 'aauth_user_to_group', 'user_id');
+    }
 }

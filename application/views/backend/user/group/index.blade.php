@@ -56,7 +56,7 @@
                         <td>{{ $group->definition }}</td>
                         <td> 
                             <a class="ui mini button orange icon" 
-                                href="{{ base_url('backend/groups/edit/' . $group->id) }}"
+                                href="{{ base_url('backend/user/groups/edit/' . $group->id) }}"
                                 data-tooltip="Edit Group">
                                 <i class="fa fa-pencil"></i>
                             </a>                             

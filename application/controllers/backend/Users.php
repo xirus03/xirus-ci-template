@@ -28,4 +28,44 @@ class Users extends MY_Controller {
 		
 		redirect( base_url('backend/users') ) ;
 	}
+
+	public function edit($id) {
+		$data['user'] = User::find($id);
+		$data['groups'] = Group::orderBy('id', 'desc')->get();
+		$this->view('backend.user.edit', $data);
+	}
+
+	public function update($id) {
+		$user = User::find($id);
+		$user->update( $this->input->post() );
+		$groups = $this->input->post('groups');
+
+		/**
+		 * get current user groups
+		 */
+		$current_group = [];
+		for( $i=0; $i<count($user->groups); $i++ ) {
+			$current_group[$i] = $user->groups[$i]->id;
+		}
+
+		/**
+		 *	add new group from current groups
+		 */
+		$new_groups = array_diff($groups, $current_group);
+		
+		foreach($new_groups as $group_id) {
+			$this->aauth->add_member($user->id, $group_id);
+		}
+
+		/**
+		 * check group id that will be remove.
+		 */
+		$remove_group = array_diff($current_group, $groups);
+
+		foreach($remove_group as $group_id) {
+			$this->aauth->remove_member($user->id, $group_id);
+		}
+		
+		redirect( base_url('backend/users') ) ;
+	}
 }

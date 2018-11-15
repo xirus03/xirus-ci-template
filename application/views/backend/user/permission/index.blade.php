@@ -39,7 +39,6 @@
                     </th>
                     <th>Name</th>
                     <th>Definition</th>
-                    <th>Groups</th>
                     <th></th>
                 </tr>
             </thead>
@@ -55,16 +54,9 @@
                         </td>
                         <td>{{ $permission->name }}</td>
                         <td>{{ $permission->definition }}</td>
-                        <td>
-                            @foreach($permission->groups as $group)
-                                <label class="ui blue label" data-tooltip="{{ $group->definition }}">
-                                    {{ $group->name }}
-                                </label>
-                            @endforeach
-                        </td>
                         <td> 
                             <a class="ui mini button orange icon" 
-                                href="{{ base_url('backend/permission/edit/' . $permission->id) }}"
+                                href="{{ base_url('backend/user/permissions/edit/' . $permission->id) }}"
                                 data-tooltip="Edit Permission">
                                 <i class="fa fa-pencil"></i>
                             </a>                             
