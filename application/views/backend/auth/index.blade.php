@@ -55,6 +55,8 @@
 <body>
     <div class="ui middle aligned center aligned grid">
         <div class="column small">
+            @include('includes.alert_message')
+
             <h2 class="ui teal image header">
                 <img src="assets/images/logo.png" class="image">
                 <div class="content">

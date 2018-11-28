@@ -12,7 +12,7 @@
         </div>
         </div>
         <div class="item">
-            <div class="ui negative button">Sign Out</div>
+            <a href="{{ base_url('backend/auth/logout') }}" class="ui negative button">Sign Out</a>
         </div>
     </div>
 </div>

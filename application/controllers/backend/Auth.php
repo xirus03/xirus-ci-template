@@ -15,10 +15,21 @@ class Auth extends MY_Controller {
         $password = $this->input->post('password');
 
         if( $this->aauth->login($email, $password) ) {
+            $this->session->set_userdata('success_message', 'You are successfully logged in.');
             redirect( base_url() );
         }
 
+        $this->session->set_userdata('error_message', 'Invalid Credentials');
         redirect( base_url('backend/auth') );
     }
 
+    public function logout() {
+        $this->aauth->logout();
+        redirect( base_url('backend/auth/back') );
+    }
+
+    public function back() {
+        $this->session->set_userdata('success_message', 'You are successfully logged out.');
+        redirect(base_url());
+    }
 }
