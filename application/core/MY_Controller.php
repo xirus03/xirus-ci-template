@@ -16,6 +16,12 @@ class MY_Controller extends CI_Controller {
         echo $this->blade->view()->make($page, $data);
     }
 
+    public function session( $function_name = '', $function ) {
+        $this->blade->compiler()->directive('get', function($key) {
+            return $this->session->userdata($key);
+        });
+    }
+
     public function register( $function_name = '', $function ) {
         $this->blade->compiler()->directive($function_name, $function);
     }

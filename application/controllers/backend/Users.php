@@ -10,23 +10,35 @@ class Users extends MY_Controller {
 	public function index()
 	{
 		$data['users'] = User::take(10)->get();
-		
 		$this->view('backend.user.index', $data);
 	}
 
 	public function create() {
-		$this->view('backend.user.create');
+		$data['groups'] = Group::orderBy('id', 'desc')->get();
+		$this->view('backend.user.create', $data);
 	}
 
 	public function insert() {
 		$email = $this->input->post('email');
 		$username = $this->input->post('username');
 		$password = $this->input->post('password');
+		$groups = $this->input->post('groups');
 
 		/** create user */
-		$result = $this->aauth->create_user($email,$password,$username);//($email, $password, $username);
-		
-		redirect( base_url('backend/users') ) ;
+		$user_id = $this->aauth->create_user($email,$password,$username);
+
+		if( empty($this->aauth->errors) ) {
+			/**
+			 * assign groups to user
+			 */
+			foreach($groups as $group_id) {
+				$status = $this->aauth->add_member($user_id, $group_id);
+			}
+			redirect( base_url('backend/users') ) ;
+		}
+
+		$this->session->set_userdata('errors', $this->aauth->errors);
+		redirect( $this->agent->referrer() );
 	}
 
 	public function edit($id) {
@@ -67,5 +79,10 @@ class Users extends MY_Controller {
 		}
 		
 		redirect( base_url('backend/users') ) ;
+	}
+
+	public function destroy($id) {
+		User::find($id)->delete();
+		redirect( base_url('backend/users') );
 	}
 }

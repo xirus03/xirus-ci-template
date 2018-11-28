@@ -109,7 +109,7 @@ $config_aauth["default"] = array(
 
  'additional_valid_chars'         => array(),
 
- 'ddos_protection'                => true,
+ 'ddos_protection'                => false,
 
  'recaptcha_active'               => false,
  'recaptcha_login_attempts'       => 4,

@@ -37,3 +37,9 @@ body {
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
 }
+.ui.message {
+    margin-left: 40px !important;
+}
+.ui.icon.message {
+    margin-left: 20px !important;
+}

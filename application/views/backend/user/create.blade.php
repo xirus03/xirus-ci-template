@@ -6,6 +6,8 @@
 
     <h2 class="ui header">Create New User</h2>
 
+    
+
     <form action="{{ base_url('backend/users/insert') }}" method="post">
         <div class="ui form segment">
             <div class="field">
@@ -21,6 +23,15 @@
             <div class="field">
                 <label>Password</label>
                 <input placeholder="Password" name="password" type="password">
+            </div>
+
+            <div class="field">
+                <label>Groups</label>
+                <select name="groups[]" multiple class="ui selection dropdown">
+                    @foreach($groups as $group)
+                        <option value="{{ $group->id }}">{{ $group->name }}</option>
+                    @endforeach
+                </select>
             </div>
 
             <button type="submit" class="ui submit button primary">Submit</button>

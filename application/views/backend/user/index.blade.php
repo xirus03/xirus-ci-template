@@ -47,7 +47,7 @@
             <tbody>
                 @if( count($users) )
                     @foreach($users as $user)
-                    <tr>
+                    <tr id="user_{{ $user->id }}">
                         <td class="collapsing">
                             <div class="ui fitted toggle checkbox">
                                 <input type="checkbox" name="id" value="{{ $user->id }}"> 
@@ -74,7 +74,13 @@
                                 href="{{ base_url('backend/users/edit/' . $user->id) }}"
                                 data-tooltip="Edit User Information">
                                 <i class="fa fa-pencil"></i>
-                            </a>                           
+                            </a>
+                            <a class="ui mini button red icon"
+                                onclick="destroy(this)"
+                                data-url="{{ base_url('backend/users/destroy/' . $user->id) }}"
+                                data-tooltip="Delete User">
+                                <i class="fa fa-trash"></i>
+                            </a>                        
                         </td>
                     </tr>
                     @endforeach
@@ -87,4 +93,37 @@
         </table>
     </div>
 
+    <div class="ui basic modal">
+        <div class="ui icon header">
+            <i class="trash icon"></i>
+            <span>Delete <strong id="username" style="text-transform: capitalize"></strong>?<span>
+        </div>
+        <div class="content">
+            <p class="center">Are you sure you want to delete this user?</p>
+        </div>
+        <div class="actions">
+            <a class="ui red basic cancel inverted button">
+                <i class="remove icon"></i>
+                No
+            </a>
+            <a id="delete_user" href="" class="ui green ok inverted button">
+                <i class="checkmark icon"></i>
+                Yes
+            </a>
+        </div>
+    </div>
+
 @endsection
+
+@push('scripts')
+<script>
+    function destroy(e) {
+        var username = $( $(e).closest('tr').find('td')[1] ).text();
+        var url = $(e).attr('data-url');
+        
+        $('#username').text(username)
+        $('#delete_user').attr('href', url);
+        $('.ui.modal').modal('show');
+    }
+</script>
+@endpush

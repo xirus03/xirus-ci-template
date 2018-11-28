@@ -210,8 +210,8 @@ class Aauth {
 				return FALSE;
 			}
 			$db_identifier = 'email';
- 		}
-
+		 }
+		 
 		// if user is not verified
 		$query = null;
 		$query = $this->aauth_db->where($db_identifier, $identifier);
@@ -223,11 +223,12 @@ class Aauth {
 			$this->error($this->CI->lang->line('aauth_error_account_not_verified'));
 			return FALSE;
 		}
+		
 
 		// to find user id, create sessions and cookies
 		$query = $this->aauth_db->where($db_identifier, $identifier);
 		$query = $this->aauth_db->get($this->config_vars['users']);
-
+		
 		if($query->num_rows() == 0){
 			$this->error($this->CI->lang->line('aauth_error_no_user'));
 			return FALSE;
@@ -718,7 +719,7 @@ class Aauth {
 			$this->error($this->CI->lang->line('aauth_error_username_exists'));
 			$valid = FALSE;
 		}
-
+		
 		if ($this->user_exist_by_email($email)) {
 			$this->error($this->CI->lang->line('aauth_error_email_exists'));
 			$valid = FALSE;
@@ -907,6 +908,7 @@ class Aauth {
 	 * @return object User information
 	 */
 	public function get_user($user_id = FALSE) {
+		return User::find($user_id);
 
 		if ($user_id == FALSE)
 			$user_id = $this->CI->session->userdata('id');
